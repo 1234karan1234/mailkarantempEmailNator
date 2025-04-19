@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempMailGen - अस्थायी Gmail पता जनरेटर</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+        }
+        .email-box {
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-blue-600">
+                    <i class="fas fa-envelope-open-text mr-2"></i>TempMailGen
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <a href="#" class="text-gray-600 hover:text-blue-600">होम</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">कैसे इस्तेमाल करें</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">FAQ</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">संपर्क</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Email Generator Section -->
+    <section class="py-8 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">अस्थायी Gmail पता जनरेटर</h1>
+                <p class="text-lg text-gray-600">स्पैम से बचें, अपनी गोपनीयता की रक्षा करें</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="mb-4 email-box p-3 bg-gray-50 flex items-center">
+                    <input type="text" id="email-display" class="w-full bg-transparent border-none outline-none text-gray-700" placeholder="आपका अस्थायी ईमेल पता यहां दिखाई देगा" readonly>
+                    <button class="ml-2 text-gray-500 hover:text-blue-600" title="कॉपी करें">
+                        <i class="far fa-copy"></i>
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <button class="btn-primary px-4 py-2 rounded-md font-medium text-sm">
+                        <i class="fas fa-plus-circle mr-1"></i> नया ईमेल जनरेट करें
+                    </button>
+                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md font-medium text-sm transition">
+                        <i class="fas fa-sync-alt mr-1"></i> रिफ्रेश
+                    </button>
+                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md font-medium text-sm transition">
+                        <i class="fas fa-inbox mr-1"></i> इनबॉक्स देखें
+                    </button>
+                </div>
+
+                <div class="bg-gray-100 p-4 rounded-md">
+                    <h3 class="font-medium text-gray-700 mb-2">ईमेल प्रकार चुनें:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="form-checkbox text-blue-600" checked>
+                            <span class="ml-2">+Gmail</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="form-checkbox text-blue-600">
+                            <span class="ml-2">.Gmail</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="form-checkbox text-blue-600">
+                            <span class="ml-2">GoogleMail</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="form-checkbox text-blue-600">
+                            <span class="ml-2">कस्टम डोमेन</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div class="text-sm text-gray-500">
+                        <a href="#" class="text-blue-600 hover:underline">10 मिनट मेल के लिए यहां क्लिक करें</a> | 
+                        <a href="#" class="text-blue-600 hover:underline">कस्टम ईमेल के लिए यहां क्लिक करें</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inbox Preview Section (Hidden by default) -->
+    <section id="inbox-section" class="hidden container mx-auto px-4 py-6 mb-8">
+        <div class="bg-white rounded-lg shadow-md">
+            <div class="flex justify-between items-center border-b p-4">
+                <h2 class="text-xl font-semibold text-gray-800">इनबॉक्स</h2>
+                <button class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="text-center text-gray-500 py-8">
+                    <i class="far fa-envelope fa-3x mb-3"></i>
+                    <p>कोई मेल नहीं मिला। कृपया अपने इनबॉक्स को रिफ्रेश करें या इंतज़ार करें।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">विशेषताएँ</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-blue-50 rounded-lg p-6 text-center">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-envelope-open-text text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Gmail मेल</h3>
+                    <p class="text-gray-600">TempMailGen लाखों Gmail ईमेल इनबॉक्स जनरेट कर सकता है। आप जिसे चाहें उपयोग कर सकते हैं।</p>
+                </div>
+                
+                <div class="bg-blue-50 rounded-lg p-6 text-center">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-shield-alt text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">स्पैम से बचाव</h3>
+                    <p class="text-gray-600">अपने व्यक्तिगत ईमेल में स्पैम की अनुमति न देकर अपने व्यक्तिगत डेटा और गोपनीयता की रक्षा करें।</p>
+                </div>
+                
+                <div class="bg-blue-50 rounded-lg p-6 text-center">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-globe text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">हर वेबसाइट पर काम करता है</h3>
+                    <p class="text-gray-600">हमारी सेवा वास्तविक Gmail पते का उपयोग करती है ताकि आपको स्पैम ईमेल के रूप में टैग न किया जाए।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Use Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">अस्थायी Gmail जनरेटर का उपयोग क्यों करें?</h2>
+                
+                <div class="prose lg:prose-xl mx-auto text-gray-600">
+                    <p>एक वर्चुअल रूप से कुशल समाज में, ईमेल का उपयोग सामाजिकरण, शिक्षा और व्यवसाय के लिए प्रमुख संचार उपकरणों में से एक बन गया है। यह माध्यम है जहां हम अपने लेनदेन, व्यापार और अन्य संबंध-आधारित सामग्री प्रदान करते हैं जिसमें गोपनीय जानकारी होती है जिसे निजी रखा जाना चाहिए। हालांकि, लगभग सभी एप्लिकेशन और वेबसाइटें अपनी सेवाओं के लिए साइन अप करने के लिए ईमेल पते की आवश्यकता होती है। अगर ऐसा है, तो क्या आप आश्वस्त हैं कि इन सेवा प्रदाताओं के साथ अपनी जानकारी साझा करने के बाद भी आपका डेटा सुरक्षित है?</p>
+                    
+                    <p>TempMailGen आपके सुरक्षा संबंधी चिंताओं से मुक्त रहने में मदद करेगा। TempMailGen एक उपयोगकर्ता-अनुकूल वेबसाइट है जो एक अनुकूलित Gmail पता प्रदान कर सकती है। आप हमारे द्वारा मुफ्त में पेश किए गए Gmail पतों की एक विस्तृत किस्म से भी चुन सकते हैं।</p>
+                    
+                    <h3 class="text-xl font-semibold mt-6 mb-2">अस्थायी Gmail पते के फायदे</h3>
+                    <ul>
+                        <li><strong>डेटा सुरक्षा:</strong> आपके वास्तविक ईमेल पर स्पैम से बचें</li>
+                        <li><strong>त्वरित पहुंच:</strong> किसी भी पंजीकरण के बिना तुरंत ईमेल पता प्राप्त करें</li>
+                        <li><strong>अनुकूलन योग्य:</strong> अपनी आवश्यकताओं के अनुसार ईमेल पता चुनें</li>
+                        <li><strong>परेशानी मुक्त:</strong> सेवा का उपयोग करने के लिए कोई खाता बनाने की आवश्यकता नहीं है</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">यह कैसे काम करता है</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">1</div>
+                            <h3 class="text-xl font-semibold">ईमेल पता जनरेट करें</h3>
+                        </div>
+                        <p class="text-gray-600">हमारे "नया ईमेल जनरेट करें" बटन पर क्लिक करें और ईमेल प्रकार चुनें जिसका आप उपयोग करना चाहते हैं।</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">2</div>
+                            <h3 class="text-xl font-semibold">ईमेल पता प्रयोग करें</h3>
+                        </div>
+                        <p class="text-gray-600">अपना ईमेल पता कॉपी करें और किसी भी वेबसाइट पर पंजीकरण के लिए इसका उपयोग करें।</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">3</div>
+                            <h3 class="text-xl font-semibold">इनबॉक्स देखें</h3>
+                        </div>
+                        <p class="text-gray-600">"इनबॉक्स देखें" बटन पर क्लिक करके अपने अस्थायी इनबॉक्स पर मिले संदेशों को देखें।</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">4</div>
+                            <h3 class="text-xl font-semibold">स्वत: हटना</h3>
+                        </div>
+                        <p class="text-gray-600">सभी ईमेल 24 घंटे के बाद स्वचालित रूप से हट जाते हैं, और सभी ईमेल का 7 दिनों का बैकअप रखा जाता है।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warning Banner -->
+    <section class="py-6 bg-yellow-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex items-start p-4 border-l-4 border-yellow-400">
+                    <div class="flex-shrink-0 mt-0.5">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 text-2xl"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-lg font-medium text-yellow-800">महत्वपूर्ण सूचना</h3>
+                        <p class="mt-2 text-yellow-700">महत्वपूर्ण जानकारी के लिए कभी भी अस्थायी मेल का उपयोग न करें। यह एक सार्वजनिक ईमेल है और किसी के द्वारा भी एक्सेस किया जा सकता है और आपका मेल पता केवल अस्थायी है।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">अक्सर पूछे जाने वाले प्रश्न</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">TempMailGen क्या है?</h3>
+                    <p class="text-gray-600">TempMailGen एक मुफ्त सेवा है जो तत्काल अस्थायी ईमेल प्राप्त करने की अनुमति देती है, जिसे "टेम्पमेल", "10 मिनट मेल", "थ्रो अवे मेल", "डिस्पोजेबल मेल", फेक ईमेल और "ट्रैश मेल" के रूप में भी जाना जाता है। इसका उपयोग आपके व्यक्तिगत ईमेल पते में स्पैम को रोकने के लिए किया जाता है।</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">क्या यह वास्तविक Gmail पते का उपयोग करता है?</h3>
+                    <p class="text-gray-600">हां, हमारी सेवा वास्तविक Gmail पतों का उपयोग करती है, इसलिए आपको कभी भी स्पैम ईमेल के रूप में टैग नहीं किया जाएगा और इसका उपयोग किसी भी वेबसाइट पर किया जा सकता है।</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">क्या मुझे रजिस्टर करने की जरूरत है?</h3>
+                    <p class="text-gray-600">नहीं, हमारी सेवा का उपयोग करने के लिए आपको कोई पंजीकरण की आवश्यकता नहीं है। बस साइट पर आएं, एक अस्थायी ईमेल जनरेट करें, और तुरंत उपयोग करना शुरू करें।</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">ईमेल कब तक उपलब्ध रहेंगे?</h3>
+                    <p class="text-gray-600">सभी ईमेल 24 घंटे के बाद स्वचालित रूप से हट जाते हैं, और सभी ईमेल का 7 दिनों का बैकअप रखा जाता है।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-xl font-bold">TempMailGen</h2>
+                    <p class="mt-2 text-gray-400">अस्थायी Gmail पता जनरेटर</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">लिंक्स</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">होम</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">कैसे इस्तेमाल करें</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">टूल्स</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">10 मिनट मेल</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">कम्पोज़ मेसेज</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">AI टूल्स</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">लीगल</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">प्राइवेसी पॉलिसी</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">टर्म्स ऑफ़ सर्विस</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">कॉन्टैक्ट</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2023 TempMailGen. सर्वाधिकार सुरक्षित।</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple functionality for demonstration purposes
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.querySelector('.btn-primary');
+            const emailDisplay = document.getElementById('email-display');
+            const inboxBtn = document.querySelector('button:nth-child(3)');
+            const inboxSection = document.getElementById('inbox-section');
+            
+            // Generate random Gmail address
+            generateBtn.addEventListener('click', function() {
+                const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                let randomName = '';
+                for(let i = 0; i < 10; i++) {
+                    randomName += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                emailDisplay.value = randomName + '@gmail.com';
+            });
+            
+            // Show/hide inbox section
+            inboxBtn.addEventListener('click', function() {
+                inboxSection.classList.toggle('hidden');
+            });
+            
+            // Copy email to clipboard
+            const copyBtn = document.querySelector('.fa-copy').parentElement;
+            copyBtn.addEventListener('click', function() {
+                if(emailDisplay.value) {
+                    navigator.clipboard.writeText(emailDisplay.value);
+                    alert('ईमेल पता कॉपी किया गया!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
